@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: currency-exchange-service-pod
+  labels:
+    name: currency-exchange-service
+  namespace: spring-cloud
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        name: currency-exchange-service
+    spec:
+      containers:
+      - name: currency-exchange-service
+        image: currency-exchange-service:v2
+        env:
+        - name: EUREKA_SERVER
+          value: eureka-server.spring-cloud.svc.cluster.local
+        - name: _JAVA_OPTIONS
+          value: -Deureka.instance.preferIpAddress=false -Deureka.client.serviceUrl.defaultZone=http://eureka-server.spring-cloud.svc.cluster.local:8761/eureka/
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: currency-exchange-service
+  labels: 
+    name: currency-exchange-service
+  namespace: spring-cloud
+spec:
+  type: NodePort
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    name: currency-exchange-service

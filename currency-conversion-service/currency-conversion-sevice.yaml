@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: currency-conversion-service-pod
+  labels:
+    name: currency-conversion-service
+  namespace: spring-cloud
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: currency-conversion-service
+    spec:
+      containers:
+      - name: currency-conversion-service
+        image: currency-conversion-service:v1
+        env:
+        - name: EUREKA_SERVER
+          value: eureka-server.spring-cloud.svc.cluster.local
+        - name: _JAVA_OPTIONS
+          value: -Deureka.instance.preferIpAddress=false -Deureka.client.serviceUrl.defaultZone=http://eureka-server.spring-cloud.svc.cluster.local:8761/eureka/
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: currency-conversion-service
+  labels: 
+    name: currency-conversion-service
+  namespace: spring-cloud
+spec:
+  type: NodePort
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    name: currency-conversion-service

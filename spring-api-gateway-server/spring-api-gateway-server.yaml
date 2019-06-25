@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spring-api-gateway-server-pod
+  labels:
+    name: spring-api-gateway-server
+  namespace: spring-cloud
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: spring-api-gateway-server
+    spec:
+      containers:
+      - name: spring-api-gateway-server
+        image: spring-api-gateway-server:v2
+        env:
+        - name: EUREKA_SERVER
+          value: eureka-server.spring-cloud.svc.cluster.local
+        - name: _JAVA_OPTIONS
+          value: -Deureka.instance.preferIpAddress=false -Deureka.client.serviceUrl.defaultZone=http://eureka-server.spring-cloud.svc.cluster.local:8761/eureka/
+        ports:
+        - containerPort: 8762
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-api-gateway-server
+  labels: 
+    name: spring-api-gateway-server
+  namespace: spring-cloud
+spec:
+  type: NodePort
+  ports:
+  - port: 8762
+    targetPort: 8762
+  selector:
+    name: spring-api-gateway-server
