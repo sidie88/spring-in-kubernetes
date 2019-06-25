@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: spring-eureka-auth
-        image: spring-eureka-auth:v3
+        image: spring-eureka-auth:v1
         env:
         - name: EUREKA_SERVER
           value: eureka-server.spring-cloud.svc.cluster.local
