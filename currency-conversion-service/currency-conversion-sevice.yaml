@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
       - name: currency-conversion-service
-        image: currency-conversion-service:v2
+        image: currency-conversion-service:v1
         env:
         - name: EUREKA_SERVER
           value: eureka-server.spring-cloud.svc.cluster.local
         - name: _JAVA_OPTIONS
           value: -Deureka.instance.preferIpAddress=false -Deureka.client.serviceUrl.defaultZone=http://eureka-server.spring-cloud.svc.cluster.local:8761/eureka/
         ports:
-        - containerPort: 8000
+        - containerPort: 8100
 ---
 apiVersion: v1
 kind: Service
@@ -33,7 +33,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 8000
-    targetPort: 8000
+  - port: 8100
+    targetPort: 8100
   selector:
     name: currency-conversion-service

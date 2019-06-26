@@ -1,4 +1,4 @@
-FROM spring-maven AS build
+FROM sidie88/spring-cloud:Hoxton-springboot-2.2.0.M4-maven-3.6.1 AS build
 COPY . /app
 WORKDIR /app
 RUN mvn install -Dmaven.test.skip=true
