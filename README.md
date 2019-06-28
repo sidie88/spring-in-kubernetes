@@ -35,7 +35,9 @@ Configure kubernetes config :
 - Command Line `setx KUBECONFIG "C:\Users\tarsidi\.kube\config"`
 
 To check config already loaded, execute this command `kubectl config view`
-    
+
+![alt text](https://raw.githubusercontent.com/sidie88/spring-in-kubernetes/master/img/config-view.PNG)
+
 After config file was loaded, create namespace by execute this command `kubectl create namespace spring-cloud`
 
 ### currency-exchange-service
@@ -47,3 +49,19 @@ After config file was loaded, create namespace by execute this command `kubectl 
 - open command line and navigate to  `currency-conversion-service` folder
 - execute `kubectl apply -f currency-conversion-sevice.yaml`
 - to check wether pod & service was created use this command `kubectl get pods -n spring-cloud`
+
+### Checking Services
+You can check the service port use this command `kubectl get services -n spring-cloud`
+
+![alt text](https://raw.githubusercontent.com/sidie88/spring-in-kubernetes/master/img/services-port.PNG)
+
+The port number we can access will be greater 30000, so in this case we can use 30920 to access currency-conversion-service and 32042 to access currency-exchange-service
+
+### Response from services
+- Currency Conversion Service
+
+![alt text](https://raw.githubusercontent.com/sidie88/spring-in-kubernetes/master/img/currency-converter.PNG)
+
+- Currency Exchange Service
+
+![alt text](https://raw.githubusercontent.com/sidie88/spring-in-kubernetes/master/img/currency-exchange.PNG)
