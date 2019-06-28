@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: currency-exchange-service-pod
+  name: currency-exchange-service
   labels:
     name: currency-exchange-service
   namespace: spring-cloud
