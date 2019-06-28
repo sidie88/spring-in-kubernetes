@@ -33,7 +33,7 @@ This project build tool is using maven. Building jar file process is inside dock
 
 ### currency-exchange-service
 - open command line and navigate to  `currency-exchange-service` folder
-- execute `kubectl apply -f currency-conversion-sevice.yaml`
+- execute `kubectl apply -f currency-exchange-sevice.yaml`
 - to check wether pod & service was created use this command `kubectl get pods -n spring-cloud`
 
 ### currency-conversion-service
