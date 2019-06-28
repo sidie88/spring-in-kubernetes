@@ -30,6 +30,13 @@ This project build tool is using maven. Building jar file process is inside dock
 - to check wether docker image was created use this command `docker image ls`
 
 ## Deploy application to Kubernetes Cluster
+Configure kubernetes config :
+- Powershell `$Env:KUBECONFIG="C:\Users\<YOUR_USER_NAME>\.kube\config"`
+- Command Line `setx KUBECONFIG "C:\Users\tarsidi\.kube\config"`
+
+To check config already loaded, execute this command `kubectl config view`
+    
+After config file was loaded, create namespace by execute this command `kubectl create namespace spring-cloud`
 
 ### currency-exchange-service
 - open command line and navigate to  `currency-exchange-service` folder
