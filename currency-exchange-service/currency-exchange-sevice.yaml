@@ -14,12 +14,10 @@ spec:
     spec:
       containers:
       - name: currency-exchange-service
-        image: currency-exchange-service:v2
+        image: currency-exchange-service:cassandra
         env:
-        - name: EUREKA_SERVER
-          value: eureka-server.spring-cloud.svc.cluster.local
         - name: _JAVA_OPTIONS
-          value: -Deureka.instance.preferIpAddress=false -Deureka.client.serviceUrl.defaultZone=http://eureka-server.spring-cloud.svc.cluster.local:8761/eureka/
+          value: -Dspring.data.cassandra.contactpoints=cassandra.spring-cloud.svc.cluster.local -Dspring.data.cassandra.port=9042 -Dspring.data.cassandra.schema-action=CREATE_IF_NOT_EXISTS
         ports:
         - containerPort: 8000
 ---

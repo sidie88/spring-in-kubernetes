@@ -1,6 +1,5 @@
-package com.cxrus.microservices.currencyexchangeservice.controller;
+package com.cxrus.microservices.controller;
 
-import java.math.BigDecimal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cxrus.microservices.currencyexchangeservice.model.ExchangeValue;
-import com.cxrus.microservices.currencyexchangeservice.repository.ExchangeValueRepository;
+import com.cxrus.microservices.cassandra.ExchangeValue;
+import com.cxrus.microservices.cassandra.ExchangeValueRepository;
 
 @RestController
 public class CurrencyExchangeController {
@@ -26,8 +25,9 @@ public class CurrencyExchangeController {
 	
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
 	public ExchangeValue retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
+		
 		ExchangeValue exchangeValue = 
-				repository.findByFromAndTo(from, to);
+				repository.findOneByKeyFromAndKeyTo(from, to);
 		
 		exchangeValue.setPort(
 				Integer.parseInt(environment.getProperty("local.server.port")));
