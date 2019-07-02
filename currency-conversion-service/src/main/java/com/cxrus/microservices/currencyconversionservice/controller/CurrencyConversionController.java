@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.cxrus.microservices.currencyconversionservice.CurrencyExchangeServiceProxy;
 import com.cxrus.microservices.currencyconversionservice.model.CurrencyConversionBean;
+import com.cxrus.microservices.currencyconversionservice.model.CurrencyConversionKeyBean;
 
 @RestController
 public class CurrencyConversionController {
@@ -24,34 +25,14 @@ public class CurrencyConversionController {
 	@Autowired
 	private CurrencyExchangeServiceProxy proxy;
 	
-	@GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
-	public CurrencyConversionBean convertCurrency(@PathVariable String from, 
-			@PathVariable String to, @PathVariable BigDecimal quantity ) {
-		
-		Map<String, String> uriVariables = new HashMap<>();
-		uriVariables.put("from", from);
-		uriVariables.put("to", to);
-
-		ResponseEntity<CurrencyConversionBean> responseEntity = new RestTemplate().getForEntity(
-				"http://localhost:8000/currency-exchange/from/{from}/to/{to}", 
-				CurrencyConversionBean.class, 
-				uriVariables);
-		
-		CurrencyConversionBean response = responseEntity.getBody();
-		
-		logger.info("{}", response);
-		
-		return new CurrencyConversionBean(1L, from, to, response.getConversionMultiple(), 
-				quantity, quantity.multiply(response.getConversionMultiple()), response.getPort(), response.getIpAddress());
-	}
-
 	@GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
 	public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, 
 			@PathVariable String to, @PathVariable BigDecimal quantity ) {
 		
 		CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
 		
-		return new CurrencyConversionBean(1L, from, to, response.getConversionMultiple(), 
-				quantity, quantity.multiply(response.getConversionMultiple()), response.getPort(), response.getIpAddress());
+		CurrencyConversionKeyBean key = new CurrencyConversionKeyBean(response.getKey().getId(), response.getKey().getFrom(), response.getKey().getTo());
+		return new CurrencyConversionBean(key, response.getConversionMultiple(), 
+				quantity, quantity.multiply(response.getConversionMultiple()),  response.getPort(), response.getIpAddress());
 	}
 }

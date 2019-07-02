@@ -22,7 +22,6 @@ public class ExchangeKey implements Serializable {
 	
 
 	public ExchangeKey(UUID id, String from, String to) {
-		super();
 		this.id = id;
 		this.from = from;
 		this.to = to;

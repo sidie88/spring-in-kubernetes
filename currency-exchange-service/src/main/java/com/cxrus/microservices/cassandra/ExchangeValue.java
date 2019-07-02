@@ -14,11 +14,9 @@ public class ExchangeValue {
 	private BigDecimal conversionMultiple;
 	private int port;
 	private String ipAddress;
-	
-	public ExchangeValue() {}
 
-
-	public ExchangeValue(final ExchangeKey key, final BigDecimal conversionMultiple, final int port, final String ipAddress) {
+	public ExchangeValue(final ExchangeKey key, final BigDecimal conversionMultiple, 
+			final int port, final String ipAddress) {
 		this.key = key;
 		this.conversionMultiple = conversionMultiple;
 		this.port = port;

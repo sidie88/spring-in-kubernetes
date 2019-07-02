@@ -3,32 +3,20 @@ package com.cxrus.microservices.currencyconversionservice.model;
 import java.math.BigDecimal;
 
 public class CurrencyConversionBean {
-	private Long id;
-	private String from;
-	private String to;
+
+	private CurrencyConversionKeyBean key;
+	
 	private BigDecimal conversionMultiple;
 	private BigDecimal quantity;
 	private BigDecimal totalCalculatedAmount;
 	private int port;
 	private String ipAddress;
 	
-	public Long getId() {
-		return id;
+	public CurrencyConversionKeyBean getKey() {
+		return key;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getFrom() {
-		return from;
-	}
-	public void setFrom(String from) {
-		this.from = from;
-	}
-	public String getTo() {
-		return to;
-	}
-	public void setTo(String to) {
-		this.to = to;
+	public void setKey(CurrencyConversionKeyBean key) {
+		this.key = key;
 	}
 	public BigDecimal getConversionMultiple() {
 		return conversionMultiple;
@@ -60,19 +48,18 @@ public class CurrencyConversionBean {
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
-	public CurrencyConversionBean(Long id, String from, String to, BigDecimal conversionMultiple, BigDecimal quantity,
+	
+	public CurrencyConversionBean(CurrencyConversionKeyBean key, BigDecimal conversionMultiple, BigDecimal quantity,
 			BigDecimal totalCalculatedAmount, int port, String ipAddress) {
-		super();
-		this.id = id;
-		this.from = from;
-		this.to = to;
+		this.key = key;
 		this.conversionMultiple = conversionMultiple;
 		this.quantity = quantity;
 		this.totalCalculatedAmount = totalCalculatedAmount;
 		this.port = port;
 		this.ipAddress = ipAddress;
 	}
-	public CurrencyConversionBean() {}
+	
+	
 	
 	
 }
