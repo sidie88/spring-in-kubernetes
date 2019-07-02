@@ -25,7 +25,7 @@ To get port used by pods, you can use this command
 
 `kubectl get services -n spring-cloud`
 
-![alt text](https://raw.githubusercontent.com/sidie88/spring-in-kubernetes/master/img/services-port2.PNG)
+![alt text](https://raw.githubusercontent.com/sidie88/spring-in-kubernetes/master/img/service-port2.PNG)
 
 - create exchange :
 
