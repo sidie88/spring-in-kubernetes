@@ -2,15 +2,20 @@ package com.cxrus.microservices.currencyconversionservice.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class CurrencyConversionBean {
 
 	private CurrencyConversionKeyBean key;
 	
 	private BigDecimal conversionMultiple;
+	
+	@JsonInclude(Include.NON_NULL)
 	private BigDecimal quantity;
+	
+	@JsonInclude(Include.NON_NULL)
 	private BigDecimal totalCalculatedAmount;
-	private int port;
-	private String ipAddress;
 	
 	public CurrencyConversionKeyBean getKey() {
 		return key;
@@ -36,30 +41,21 @@ public class CurrencyConversionBean {
 	public void setTotalCalculatedAmount(BigDecimal totalCalculatedAmount) {
 		this.totalCalculatedAmount = totalCalculatedAmount;
 	}
-	public int getPort() {
-		return port;
-	}
-	public void setPort(int port) {
-		this.port = port;
-	}
-	public String getIpAddress() {
-		return ipAddress;
-	}
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
 	
 	public CurrencyConversionBean(CurrencyConversionKeyBean key, BigDecimal conversionMultiple, BigDecimal quantity,
-			BigDecimal totalCalculatedAmount, int port, String ipAddress) {
+			BigDecimal totalCalculatedAmount) {
 		this.key = key;
 		this.conversionMultiple = conversionMultiple;
 		this.quantity = quantity;
 		this.totalCalculatedAmount = totalCalculatedAmount;
-		this.port = port;
-		this.ipAddress = ipAddress;
 	}
 	
+	public CurrencyConversionBean(CurrencyConversionKeyBean key, BigDecimal conversionMultiple) {
+		this.key = key;
+		this.conversionMultiple = conversionMultiple;
+	}
 	
+	public CurrencyConversionBean() {}
 	
 	
 }

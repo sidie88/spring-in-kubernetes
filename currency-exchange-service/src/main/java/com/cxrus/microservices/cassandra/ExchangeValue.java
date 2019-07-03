@@ -12,15 +12,10 @@ public class ExchangeValue {
 	private ExchangeKey key;
 	
 	private BigDecimal conversionMultiple;
-	private int port;
-	private String ipAddress;
 
-	public ExchangeValue(final ExchangeKey key, final BigDecimal conversionMultiple, 
-			final int port, final String ipAddress) {
+	public ExchangeValue(final ExchangeKey key, final BigDecimal conversionMultiple) {
 		this.key = key;
 		this.conversionMultiple = conversionMultiple;
-		this.port = port;
-		this.ipAddress = ipAddress;
 	}
 
 	public ExchangeKey getKey() {
@@ -38,22 +33,6 @@ public class ExchangeValue {
 
 	public void setConversionMultiple(BigDecimal conversionMultiple) {
 		this.conversionMultiple = conversionMultiple;
-	}
-
-	public int getPort() {
-		return port;
-	}
-
-	public void setPort(int port) {
-		this.port = port;
-	}
-
-	public String getIpAddress() {
-		return ipAddress;
-	}
-
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
 	}
 	
 }
