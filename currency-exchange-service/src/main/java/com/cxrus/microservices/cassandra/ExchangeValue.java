@@ -12,6 +12,7 @@ public class ExchangeValue {
 	private ExchangeKey key;
 	
 	private BigDecimal conversionMultiple;
+	private String hostName;
 
 	public ExchangeValue(final ExchangeKey key, final BigDecimal conversionMultiple) {
 		this.key = key;
@@ -33,6 +34,14 @@ public class ExchangeValue {
 
 	public void setConversionMultiple(BigDecimal conversionMultiple) {
 		this.conversionMultiple = conversionMultiple;
+	}
+
+	public String getHostName() {
+		return hostName;
+	}
+
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
 	}
 	
 }

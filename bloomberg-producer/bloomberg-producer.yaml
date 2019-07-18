@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bloomberg-producer-pod
+  labels:
+    name: bloomberg-producer
+  namespace: spring-cloud
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: bloomberg-producer
+    spec:
+      containers:
+      - name: bloomberg-producer
+        image: bloomberg-producer:v1
+        env:
+        - name: _JAVA_OPTIONS
+          value: -Dkafka.bootstrapAddress=kafka-broker:9092 -Dcurrency.topic.name=conversion-topic
+        - name: RABBIT_URI
+          value: amqp://rabbitmq

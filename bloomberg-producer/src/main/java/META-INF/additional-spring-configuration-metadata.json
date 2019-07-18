@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "kafka.bootstrapAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'kafka.bootstrapAddress'"
+  },
+  {
+    "name": "partitioned.topic.name",
+    "type": "java.lang.String",
+    "description": "A description for 'partitioned.topic.name'"
+  },
+  {
+    "name": "currency.topic.name",
+    "type": "java.lang.String",
+    "description": "A description for 'currency.topic.name'"
+  },
+  {
+    "name": "bloomberg.rapid.api.key",
+    "type": "java.lang.String",
+    "description": "A description for 'bloomberg.rapid.api.key'"
+  },
+  {
+    "name": "bloomberg.rapid.api.host",
+    "type": "java.lang.String",
+    "description": "A description for 'bloomberg.rapid.api.host'"
+  },
+  {
+    "name": "bloomberg.rapid.api.currencies.id",
+    "type": "java.lang.String",
+    "description": "A description for 'bloomberg.rapid.api.currencies.id'"
+  },
+  {
+    "name": "kafka.bootstrapAddress",
+    "type": "java.lang.String",
+    "description": "A description for 'kafka.bootstrapAddress'"
+  }
+]}

@@ -18,7 +18,7 @@ import com.cxrus.microservices.currencyconversionservice.model.CurrencyConversio
 @RestController
 public class CurrencyConversionController {
 	
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private CurrencyExchangeServiceProxy proxy;
@@ -27,12 +27,12 @@ public class CurrencyConversionController {
 	public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, 
 			@PathVariable String to, @PathVariable BigDecimal quantity ) {
 		
-		return proxy.retrieveExchangeValue(from, to);
-//		CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
+//		return proxy.retrieveExchangeValue(from, to);
+		CurrencyConversionBean response = proxy.retrieveExchangeValue(from, to);
 		
-//		CurrencyConversionKeyBean key = new CurrencyConversionKeyBean(response.getKey().getId(), response.getKey().getFrom(), response.getKey().getTo());
-//		return new CurrencyConversionBean(key, response.getConversionMultiple(), 
-//				quantity, quantity.multiply(response.getConversionMultiple()));
+		log.info("{}", response);
+		
+		return response;
 	}
 	
 	@PostMapping("/currency-converter-feign/create")

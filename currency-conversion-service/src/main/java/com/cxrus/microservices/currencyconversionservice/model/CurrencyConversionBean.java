@@ -17,6 +17,9 @@ public class CurrencyConversionBean {
 	@JsonInclude(Include.NON_NULL)
 	private BigDecimal totalCalculatedAmount;
 	
+	@JsonInclude(Include.NON_NULL)
+	private String hostName;
+	
 	public CurrencyConversionKeyBean getKey() {
 		return key;
 	}
@@ -42,6 +45,12 @@ public class CurrencyConversionBean {
 		this.totalCalculatedAmount = totalCalculatedAmount;
 	}
 	
+	public String getHostName() {
+		return hostName;
+	}
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
 	public CurrencyConversionBean(CurrencyConversionKeyBean key, BigDecimal conversionMultiple, BigDecimal quantity,
 			BigDecimal totalCalculatedAmount) {
 		this.key = key;
