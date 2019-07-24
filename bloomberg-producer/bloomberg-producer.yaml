@@ -17,6 +17,6 @@ spec:
         image: bloomberg-producer:v1
         env:
         - name: _JAVA_OPTIONS
-          value: -Dkafka.bootstrapAddress=kafka-broker:9092 -Dcurrency.topic.name=conversion-topic
+          value: -Dkafka.bootstrapAddress=10.1.3.6:9092 -Dcurrency.topic.name=conversion-topic
         - name: RABBIT_URI
           value: amqp://rabbitmq
