@@ -50,4 +50,4 @@ spec:
           value: "false"
         # The hostnames must match with the the eureka serviceUrls, otherwise the replicas are reported as unavailable in the eureka dashboard      
         - name: EUREKA_INSTANCE_HOSTNAME
-          value: ${MY_POD_NAME}.eureka-server
+          value: $(MY_POD_NAME).eureka-server
