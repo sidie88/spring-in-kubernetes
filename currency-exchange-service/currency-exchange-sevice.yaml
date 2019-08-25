@@ -16,10 +16,19 @@ spec:
       - name: currency-exchange-service
         image: currency-exchange-service:cassandra
         env:
+        - name: MY_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: _JAVA_OPTIONS
-          value: -Dspring.data.cassandra.contact-points=cassandra.spring-cloud.svc.cluster.local -Dspring.data.cassandra.port=9042 -Dspring.data.cassandra.schema-action=CREATE_IF_NOT_EXISTS -Deureka.instance.preferIpAddress=false -Deureka.client.serviceUrl.defaultZone=http://eureka-server.spring-cloud.svc.cluster.local:8761/eureka/
+          value: |-
+                  -Dspring.data.cassandra.contact-points=cassandra.$(MY_NAMESPACE).svc.cluster.local 
+                  -Dspring.data.cassandra.port=9042 
+                  -Dspring.data.cassandra.schema-action=CREATE_IF_NOT_EXISTS 
+                  -Deureka.instance.preferIpAddress=false 
+                  -Deureka.client.serviceUrl.defaultZone=http://eureka-server.$(MY_NAMESPACE).svc.cluster.local:8761/eureka/
         - name: RABBIT_URI
-          value: amqp://rabbitmq  
+          value: amqp://rabbitmq-service.$(MY_NAMESPACE).svc.cluster.local:5672 
         ports:
         - containerPort: 8000
 ---

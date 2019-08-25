@@ -7,7 +7,7 @@ metadata:
   namespace: spring-cloud
 spec:
   serviceName: cassandra
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: cassandra
@@ -30,6 +30,13 @@ spec:
           name: jmx
         - containerPort: 9042
           name: cql
+        resources:
+          limits:
+            cpu: "500m"
+            memory: 1Gi
+          requests:
+            cpu: "500m"
+            memory: 1Gi
         securityContext:
           capabilities:
             add:
@@ -42,12 +49,16 @@ spec:
               - -c
               - nodetool drain
         env:
+          - name: MY_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
           - name: MAX_HEAP_SIZE
             value: 512M
           - name: HEAP_NEWSIZE
             value: 100M
           - name: CASSANDRA_SEEDS
-            value: "cassandra-0.cassandra.spring-cloud.svc.cluster.local"
+            value: "cassandra-0.cassandra.$(MY_NAMESPACE).svc.cluster.local"
           - name: CASSANDRA_CLUSTER_NAME
             value: "K8Demo"
           - name: CASSANDRA_DC
@@ -69,26 +80,26 @@ spec:
         # These volume mounts are persistent. They are like inline claims,
         # but not exactly because the names need to match exactly one of
         # the stateful pod volumes.
-        #volumeMounts:
-        #- name: cassandra-data
-        #  mountPath: d:/RnD/Kubernetes/cassandra-data
+        volumeMounts:
+        - name: cassandra-data
+          mountPath: /cassandra_data
   # These are converted to volume claims by the controller
   # and mounted at the paths mentioned above.
   # do not use these in production until ssd GCEPersistentDisk or other ssd pd
-#   volumeClaimTemplates:
-#   - metadata:
-#       name: cassandra-data
-#     spec:
-#       accessModes: [ "ReadWriteOnce" ]
-#       storageClassName: fast
-#       resources:
-#         requests:
-#           storage: 1Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: cassandra-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: fast
+      resources:
+        requests:
+          storage: 1Gi
 ---
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: fast
-provisioner: k8s.io/minikube-hostpath
-parameters:
-  type: pd-ssd
+  namespace: spring-cloud
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer

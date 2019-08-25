@@ -43,7 +43,9 @@ spec:
               fieldPath: metadata.name
           # Due to camelcase issues with "defaultZone" and "preferIpAddress", _JAVA_OPTIONS is used here
         - name: _JAVA_OPTIONS
-          value: -Deureka.instance.preferIpAddress=false -Deureka.client.serviceUrl.defaultZone=http://eureka-server-0.eureka-server:8761/eureka/
+          value: |-
+                  -Deureka.instance.preferIpAddress=false 
+                  -Deureka.client.serviceUrl.defaultZone=http://eureka-server-0.eureka-server:8761/eureka/
         - name: EUREKA_CLIENT_REGISTERWITHEUREKA
           value: "false"
         - name: EUREKA_CLIENT_FETCHREGISTRY
